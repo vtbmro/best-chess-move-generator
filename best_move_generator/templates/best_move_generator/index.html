@@ -1,25 +1,129 @@
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    
-    <link rel="stylesheet"
-    href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css"
-    integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU"
-    crossorigin="anonymous">
-        
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-    integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2"
-    crossorigin="anonymous"></script>
+{% load static %}
 
-    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"
-    integrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3QbPyX8kWyb93+8AC/pPWTzj+nHtbC5bxD"
-    crossorigin="anonymous"></script>
-</head>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <style>
+            .chess-board { border-spacing: 0; border-collapse: collapse; }
+            .chess-board th { padding: .5em; }
+            .chess-board th + th { border-bottom: 1px solid #000; }
+            .chess-board th:first-child,
+            .chess-board td:last-child { border-right: 1px solid #000; }
+            .chess-board tr:last-child td { border-bottom: 1px solid; }
+            .chess-board th:empty { border: none; }
+            .chess-board td { width: 1.5em; height: 1.5em; text-align: center; font-size: 32px; line-height: 0;}
+            .chess-board .light { background: #eee; }
+            .chess-board .dark { background: #aaa; }
+        </style>
+    </head>
+    <body>
+        <table class="chess-board">
+            <tbody>
+                <tr>
+                    <th></th>
+                    <th>a</th>
+                    <th>b</th>
+                    <th>c</th>
+                    <th>d</th>
+                    <th>e</th>
+                    <th>f</th>
+                    <th>g</th>
+                    <th>h</th>
+                </tr>
+                <tr>
+                    <th>8</th>
+                    <td class="light">♜</td>
+                    <td class="dark">♞</td>
+                    <td class="light">♝</td>
+                    <td class="dark">♛</td>
+                    <td class="light">♚</td>
+                    <td class="dark">♝</td>
+                    <td class="light">♞</td>
+                    <td class="dark">♜</td>
+                </tr>
+                <tr>
+                    <th>7</th>
+                    <td class="dark">♟</td>
+                    <td class="light">♟</td>
+                    <td class="dark">♟</td>
+                    <td class="light">♟</td>
+                    <td class="dark">♟</td>
+                    <td class="light">♟</td>
+                    <td class="dark">♟</td>
+                    <td class="light">♟</td>
+                </tr>
+                <tr>
+                    <th>6</th>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                </tr>
+                <tr>
+                    <th>5</th>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                </tr>
+                <tr>
+                    <th>4</th>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                    <td class="dark"></td>
+                    <td class="light"></td>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <td class="light">♙</td>
+                    <td class="dark">♙</td>
+                    <td class="light">♙</td>
+                    <td class="dark">♙</td>
+                    <td class="light">♙</td>
+                    <td class="dark">♙</td>
+                    <td class="light">♙</td>
+                    <td class="dark">♙</td>
+                </tr>
+                <tr>
+                    <th>1</th>
+                    <td class="dark">♖</td>
+                    <td class="light">♘</td>
+                    <td class="dark">♗</td>
+                    <td class="light">♕</td>
+                    <td class="dark">♔</td>
+                    <td class="light">♗</td>
+                    <td class="dark">♘</td>
+                    <td class="light">♖</td>
+                </tr>
+            </tbody>
+        </table>
+        <script src="{% static "script.js" %}">
 
-<body>
-    <div id="board1" style="width: 400px"></div>
-    <button id="startBtn">Start Position</button>
-    <button id="clearBtn">Clear Board</button>
-    <script>
-        var board1 = Chessboard('board1', 'start')
-    </script>
-</body>
+        </script>
+    </body>
+</html>
