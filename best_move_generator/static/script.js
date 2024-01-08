@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function(){
         
     let main_button = document.querySelector("#calculateBtn")
     main_button.addEventListener("click", function(){
-        get_fen_notation()
+        calculate_best_move(get_fen_notation())
     })
 })
 
@@ -88,7 +88,8 @@ function get_fen_notation(){
                     case "wP":
                         fen += "P"
                         break;                     
-                }               
+                }
+            // No img in the element                  
             }else if(square.getElementsByTagName('img').length == 0){
                 counter += 1
             }
@@ -101,14 +102,19 @@ function get_fen_notation(){
                   fen += counter.toString();
                     counter = 0  
                 }
-            
-                fen += "/"
+                fen += "_"
             }
         }   
     }
     
-    console.log(fen.slice(0,-1))
-
-
+    return (fen.slice(0,-1))
     // NOTE: could have used something more complex but this does the trick
+}
+
+function calculate_best_move(fen){
+    fetch(`http://127.0.0.1:8000/calculate_best_move/${fen}`)
+    .then(response => response.json())
+    .then(json => {
+        console.log(json)
+    })
 }
