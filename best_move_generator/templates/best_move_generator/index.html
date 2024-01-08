@@ -20,12 +20,30 @@
         <script src="{% static "script.js" %}"></script>
     </head>
     <body>
-        <!-- After some experimenting landed on Chessboard.js and 
-        with some tweakin managed to make it work with Django-->
-        <div id="board2" style="width: 400px"></div>
-        <button id="startBtn">Start Position</button>
-        <button id="clearBtn">Clear Board</button>
-        <button id="calculateBtn">Calcualte Best Move</button>
+      <!-- After some experimenting landed on Chessboard.js and 
+      with some tweakin managed to make it work with Django-->
+      <div id="board2" style="width: 400px"></div>
+      
+      <fieldset>
+        <legend>Player to move:</legend>
+        
+        <div>
+          <input type="radio" id="white" name="drone" value="white" checked />
+          <label for="white">White</label>
+        </div>
+      
+        <div>
+          <input type="radio" id="black" name="drone" value="black" />
+          <label for="black">Black</label>
+        </div>
+
+      </fieldset>
+      
+      
+
+      <button id="startBtn">Start Position</button>
+      <button id="clearBtn">Clear Board</button>
+      <button id="calculateBtn">Calcualte Best Move</button>
 
     </body>
 </html>
