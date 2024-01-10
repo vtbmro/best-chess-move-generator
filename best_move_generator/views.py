@@ -26,18 +26,21 @@ def calculate_best_move(request, fen, moves_next):
 
 # Transform into valid fen
         fen = fen.replace("_","/")
-
+        board = chess.Board(f"{fen}")
+        
 # Black or white to move
         isMaximizingPlayer = ""
         if moves_next == "white":
             isMaximizingPlayer = True
-        else:
-            isMaximizingPlayer = False
             
+        elif moves_next == "black":
+            # Added this so player can also select move with black
+            board.turn = False
+            isMaximizingPlayer = False
+        
 
 # TODO: calculate best move
             
-        board = chess.Board(f"{fen}")
-        best_value, best_moves = minimax_alphabeta(board, 3, -math.inf, math.inf, isMaximizingPlayer)
-        print(best_value, best_moves)
-        return JsonResponse({"value":str(best_value),"moves":str(best_moves)})
+        
+        best_value, best_moves = minimax_alphabeta(board, 4, -math.inf, math.inf, isMaximizingPlayer)
+        return JsonResponse({"value":str(best_value),"move":str(best_moves)})
