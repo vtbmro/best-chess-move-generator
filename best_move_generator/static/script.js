@@ -1,6 +1,7 @@
 // DOM loaded
 document.addEventListener("DOMContentLoaded", function(){
     
+    // ChessboardJS
     var board2 = Chessboard('board2', {
         draggable: true,
         dropOffBoard: 'trash',
@@ -9,10 +10,17 @@ document.addEventListener("DOMContentLoaded", function(){
 
         $('#startBtn').on('click', board2.start)
         $('#clearBtn').on('click', board2.clear)
-        
+
+    // Get what user moves next (Black or White)
+    
+
     let main_button = document.querySelector("#calculateBtn")
     main_button.addEventListener("click", function(){
-        calculate_best_move(get_fen_notation())
+
+        // Input what color is next to move
+        let moves_next = document.querySelector('input[name="drone"]:checked') 
+        moves_next = moves_next.getAttribute("value")
+        calculate_best_move(get_fen_notation(), moves_next)
     })
 })
 
@@ -111,8 +119,8 @@ function get_fen_notation(){
     // NOTE: could have used something more complex but this does the trick
 }
 
-function calculate_best_move(fen){
-    fetch(`http://127.0.0.1:8000/calculate_best_move/${fen}`)
+function calculate_best_move(fen, moves_next){
+    fetch(`http://127.0.0.1:8000/calculate_best_move/${fen}/${moves_next}`)
     .then(response => response.json())
     .then(json => {
         console.log(json)
