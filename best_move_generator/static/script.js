@@ -12,15 +12,20 @@ document.addEventListener("DOMContentLoaded", function(){
         $('#clearBtn').on('click', board2.clear)
 
     // Get what user moves next (Black or White)
-    
 
     let main_button = document.querySelector("#calculateBtn")
     main_button.addEventListener("click", function(){
 
         // Input what color is next to move
-        let moves_next = document.querySelector('input[name="drone"]:checked') 
-        moves_next = moves_next.getAttribute("value")
-        calculate_best_move(get_fen_notation(), moves_next)
+        try{
+            let moves_next = document.querySelector('input[name="drone"]:checked') 
+            moves_next = moves_next.getAttribute("value")
+            calculate_best_move(get_fen_notation(), moves_next)
+        }
+        catch(err){
+            alert("Please select a player to move")
+        }
+        
     })
 })
 
