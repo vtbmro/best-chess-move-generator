@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
-from .eval import evaluate 
 from .search import minimax_alphabeta
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 import math
 import chess
 
@@ -17,18 +16,24 @@ def piece_png(request, piece):
 # API that calculates the best possible move
 def calculate_best_move(request, fen, moves_next):
 
-# Check if request is GET
+    # Not GET request
     if request.method != "GET":
         return JsonResponse({"error": "GET request required."}, status=400)
 
-# If request is GET return best move from fen        
+    # GET request        
     else:
 
-# Transform into valid fen
+        # Transform into valid fen
         fen = fen.replace("_","/")
         board = chess.Board(f"{fen}")
+
+        print(fen)
+
+        # TODO: Check that fen only has 1 king of each color (Valid FEN)
+        if fen.count("k") != 1 or fen.count("K") != 1:
+            return  JsonResponse({"Invalid board": "Please input only 1 king of each color"})
         
-# Black or white to move
+        # Black or white to move
         isMaximizingPlayer = ""
         if moves_next == "white":
             isMaximizingPlayer = True
@@ -38,9 +43,5 @@ def calculate_best_move(request, fen, moves_next):
             board.turn = False
             isMaximizingPlayer = False
         
-
-# TODO: calculate best move
-            
-        
-        best_value, best_moves = minimax_alphabeta(board, 4, -math.inf, math.inf, isMaximizingPlayer)
+        best_value, best_moves = minimax_alphabeta(board, 5, -math.inf, math.inf, isMaximizingPlayer)
         return JsonResponse({"value":str(best_value),"move":str(best_moves)})
