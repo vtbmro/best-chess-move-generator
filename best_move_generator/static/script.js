@@ -14,16 +14,19 @@ document.addEventListener("DOMContentLoaded", function(){
     // Get what user moves next (Black or White)
 
     let main_button = document.querySelector("#calculateBtn")
-    main_button.addEventListener("click", function(){
+    main_button.addEventListener("click", async function(){
 
+        let result = document.getElementById("result")
         // Input what color is next to move
         try{
             let moves_next = document.querySelector('input[name="drone"]:checked') 
             moves_next = moves_next.getAttribute("value")
-            calculate_best_move(get_fen_notation(), moves_next)
+            
+            let moves = await calculate_best_move(get_fen_notation(), moves_next)
+            result.innerHTML = `Move: ${moves.move}, Position value (centipawn): ${moves.value}`
         }
         catch(err){
-            alert("Please select a player to move")
+            result.innerHTML = "Please select a color to move"
         }
         
     })
@@ -102,6 +105,7 @@ function get_fen_notation(){
                         fen += "P"
                         break;                     
                 }
+
             // No img in the element                  
             }else if(square.getElementsByTagName('img').length == 0){
                 counter += 1
@@ -124,10 +128,8 @@ function get_fen_notation(){
     // NOTE: could have used something more complex but this does the trick
 }
 
-function calculate_best_move(fen, moves_next){
-    fetch(`http://127.0.0.1:8000/calculate_best_move/${fen}/${moves_next}`)
-    .then(response => response.json())
-    .then(json => {
-        console.log(json)
-    })
+async function calculate_best_move(fen, moves_next) {
+    const response = await fetch(`http://127.0.0.1:8000/calculate_best_move/${fen}/${moves_next}`)
+    const move = await response.json();
+    return move;
 }
