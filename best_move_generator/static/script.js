@@ -17,15 +17,24 @@ document.addEventListener("DOMContentLoaded", function(){
     main_button.addEventListener("click", async function(){
 
         let result = document.getElementById("result")
+        result.innerHTML = "Loading..."
+
         // Input what color is next to move
         try{
             let moves_next = document.querySelector('input[name="drone"]:checked') 
-            moves_next = moves_next.getAttribute("value")
-            
+            moves_next = moves_next.getAttribute("value")  
+        
             let moves = await calculate_best_move(get_fen_notation(), moves_next)
-            result.innerHTML = `Move: ${moves.move}, Position value (centipawn): ${moves.value}`
+
+            if (moves.Invalid_board = "Please input only 1 king of each color"){
+                result.innerHTML = `Please input only 1 king of each color` 
+            }else{
+               result.innerHTML = `Move: ${moves.move}` 
+            }
+            
         }
         catch(err){
+            console.log(err)
             result.innerHTML = "Please select a color to move"
         }
         
@@ -131,5 +140,6 @@ function get_fen_notation(){
 async function calculate_best_move(fen, moves_next) {
     const response = await fetch(`http://127.0.0.1:8000/calculate_best_move/${fen}/${moves_next}`)
     const move = await response.json();
+    console.log(move)
     return move;
 }
