@@ -26,12 +26,9 @@ def calculate_best_move(request, fen, moves_next):
         # Transform into valid fen
         fen = fen.replace("_","/")
         board = chess.Board(f"{fen}")
-
-        print(fen)
-
-        # TODO: Check that fen only has 1 king of each color (Valid FEN)
+        
         if fen.count("k") != 1 or fen.count("K") != 1:
-            return  JsonResponse({"Invalid_board": "Please input only 1 king of each color"})
+            return  JsonResponse({"Invalid_board": "Please input 1 king of each color"})
         
         # Black or white to move
         isMaximizingPlayer = ""

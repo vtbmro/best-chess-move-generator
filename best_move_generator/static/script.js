@@ -26,15 +26,15 @@ document.addEventListener("DOMContentLoaded", function(){
         
             let moves = await calculate_best_move(get_fen_notation(), moves_next)
 
-            if (moves.Invalid_board = "Please input only 1 king of each color"){
-                result.innerHTML = `Please input only 1 king of each color` 
-            }else{
-               result.innerHTML = `Move: ${moves.move}` 
+            if (moves.Invalid_board == "Please input 1 king of each color"){
+                result.innerHTML = "Please input 1 king of each color"
             }
-            
+            else{
+                result.innerHTML = `Move: ${moves.move}`   
+            }
+    
         }
         catch(err){
-            console.log(err)
             result.innerHTML = "Please select a color to move"
         }
         
