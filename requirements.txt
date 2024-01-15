@@ -1,0 +1,2 @@
+Required:
+Chessboard.js https://chessboardjs.com/
