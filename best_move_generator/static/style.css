@@ -1,11 +1,48 @@
 fieldset
 {
-  max-width:500px;
-  padding:16px;	
-  margin-bottom: 16px;
+  width:380px ;
+  background-color: #33475b;
+  color: white;
+  padding: 10px;
+  margin: 0;
+  margin-bottom: 10px;
+  border: 1px solid black;
 }
 .legend1
 {
   margin-bottom:0px;
   margin-left:16px;
+  color: white;
+  font-weight: 700;
+  background-color: #33475b;
+  border-top: 1px solid black;
+  padding: 2px;
+}
+body
+{
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #DBF9FC; 
+}
+.row
+{
+  display: flex;
+  align-items: center;
+  justify-content: ceter;
+  flex-direction: row;
+}
+button {
+  background-color: #33475b;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border: 1px solid black;
 }
